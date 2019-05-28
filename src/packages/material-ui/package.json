@@ -7,6 +7,8 @@
   "description": "Material UI for SpringType.",
   "dependencies": {
     "@material/ripple": "^1.1.0",
+    "@material/radio": "^1.1.0",
+    "@material/select": "^1.1.0",
     "@springtype/core": "^1.0.0-alpha.1.10",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.10.5",
