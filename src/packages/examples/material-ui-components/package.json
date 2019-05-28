@@ -24,8 +24,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@material/button": "^1.0.1",
-    "@material/checkbox": "^1.0.1",
     "parcel": "^1.12.3",
     "sass": "^1.17.2",
     "typescript": "^3.3.4000"

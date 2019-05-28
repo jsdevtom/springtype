@@ -3,6 +3,7 @@ import classNames from "classnames";
 import {MWCRadio} from "./MWCRadio";
 // css
 import '@material/radio/dist/mdc.radio.min.css';
+import '@material/form-field/dist/mdc.form-field.min.css';
 
 export default (view: MWCRadio) => {
 
@@ -25,11 +26,16 @@ export default (view: MWCRadio) => {
         inputElement.attributes.name = view.name;
     }
 
-    return <div class={classes}>
-        {inputElement}
-        <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
+    return <div class="mdc-form-field">
+        <div class={classes}>
+            {inputElement}
+            <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+            </div>
         </div>
+        <label for="radio-1">{view.label}</label>
     </div>
+
+
 }

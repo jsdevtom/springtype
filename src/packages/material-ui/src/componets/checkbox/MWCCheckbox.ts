@@ -9,6 +9,7 @@ import {
 } from "@springtype/core";
 import template from "./MWCCheckbox.tpl";
 import style from "./MWCCheckbox.tss";
+import {MDCRipple} from "@material/ripple/component";
 
 @Element('mwc-checkbox')
 @Template(template)
@@ -27,8 +28,26 @@ export class MWCCheckbox extends HTMLElement implements Lifecycle {
     @Attribute
     value = '';
 
+    @Attribute
+    name = '';
+
+    @Attribute
+    label = '';
+
     @EventAttribute
     onchange = (evt: Event) => {};
+
+    constructor(protected checkbox: HTMLInputElement) {
+        super();
+
+    }
+
+    onFlow(initial: boolean) {
+        if (initial && this.indeterminate) {
+            this.checkbox.indeterminate = true;
+        }
+    }
+
 }
 
 declare global {

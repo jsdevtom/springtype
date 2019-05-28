@@ -6,10 +6,6 @@ export default (view: MWCCheckbox): TypedStyleSheet => ({
 
     [HOST_SELECTOR]: {
         outline: 'none'
-    },
-
-    ['.foobar']: {
-
     }
 });
 

@@ -5,8 +5,6 @@
 
     <title>material</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link rel="stylesheet" href="../node_modules/@material/button/dist/mdc.button.min.css"/>
-    <link rel="stylesheet" href="../node_modules/@material/checkbox/dist/mdc.checkbox.min.css"/>
 
     <!-- main application logic entry-point -->
     <script src="./MaterialExampleApp.tsx"></script>
@@ -19,7 +17,7 @@
                 Before...
             </div>
             <div>
-                More!
+                <b>More!</b>
             </div>
         </mwc-button>
     </div>
@@ -40,10 +38,31 @@
         <mwc-button label="raised" raised="true"/>
     </div>
     <div>
-        <mwc-checkbox checked="true" onchange="console.log('foo', this);"/>
+        <mwc-checkbox checked="true" value="ddgdg" onchange="console.log('foo', this);"/>
     </div>
     <div>
-        <mwc-checkbox checked="true" disabled="true"/>
+        <mwc-checkbox checked="true" disabled="true" label="dfdfgdf"/>
+    </div>
+    <div>
+        <mwc-checkbox indeterminate="true" label="dfdfgdf"/>
+    </div>
+
+    <div>
+        <mwc-radio checked="true" disabled="false" value="test2" name="test1" label="men"/>
+    </div>
+    <div>
+        <mwc-radio checked="true" disabled="false" value="test1" name="test1" label="female"/>
+    </div>
+    <div>
+        <mwc-select>
+            <div>
+
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="vw">VW</option>
+            <option value="audi" selected>Audi</option>
+            </div>
+        </mwc-select>
     </div>
 </body>
 </html>

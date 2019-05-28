@@ -2,7 +2,7 @@ import {VirtualElement, ActiveRenderer} from "@springtype/core";
 import classNames from "classnames";
 import {MWCSelect} from "./MWCSelect";
 // css
-import '@material/radio/dist/mdc.radio.min.css';
+import '@material/select/dist/mdc.select.min.css';
 
 export default (view: MWCSelect) => {
 

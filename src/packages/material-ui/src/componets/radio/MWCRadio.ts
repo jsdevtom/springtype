@@ -35,9 +35,11 @@ export class MWCRadio extends HTMLElement implements Lifecycle {
     @Attribute
     name = '';
 
+    @Attribute
+    label = '';
+
     @EventAttribute
-    onchange = (evt: Event) => {
-    };
+    onchange = (evt: Event) => {};
 
     constructor(protected radio: HTMLButtonElement) {
         super();

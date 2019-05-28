@@ -30,7 +30,7 @@ export class MWCSelect extends HTMLElement implements Lifecycle {
     name = '';
 
     @EventAttribute
-    onchange;
+    onchange = (evt: Event) => {};
 
     constructor(protected select: HTMLButtonElement) {
         super();
