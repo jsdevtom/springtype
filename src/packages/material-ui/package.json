@@ -12,6 +12,7 @@
     "@material/radio": "^2.3.0",
     "@material/ripple": "^2.3.0",
     "@material/select": "^2.3.0",
+    "@material/switch": "^2.3.0",
     "@springtype/core": "file:../core",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.10.5",
