@@ -1,7 +1,7 @@
 import {VirtualElement, ActiveRenderer} from "@springtype/core";
 import classNames from "classnames";
 import {MWCSelect} from "./MWCSelect";
-// css
+
 import '@material/select/dist/mdc.select.min.css';
 
 export default (view: MWCSelect) => {
@@ -13,7 +13,7 @@ export default (view: MWCSelect) => {
 
     const selectElement: VirtualElement =
         <select inject={{select: view}} class="mdc-select__native-control">
-            <st-slot />
+            <st-slot unwrap />
         </select>;
 
     if (view.disabled) {

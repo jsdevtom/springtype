@@ -34,7 +34,9 @@ export class VirtualDOMMutator {
         return slotChildren;
     };
 
-    static mutateSlotElement = (parent: Element, virtualElement: VirtualElement) => {
+    static mutateSlotElement = (parent: Element, virtualElements: Array<VirtualElement|string>, index: number) => {
+
+        const virtualElement = virtualElements[index] as VirtualElement;
 
         if (parent) {
 
@@ -63,13 +65,11 @@ export class VirtualDOMMutator {
                             }
 
                         } else if (!slotSelectionName) {
-
                             // in case of <slot> without name and no slot name selection
-                            filteredSlotChildren.push(...slotChild.children);
+                            filteredSlotChildren.push(slotChild);
                         }
 
                     } else {
-
                         // no slot name based selection possible as it is a TextNode
                         filteredSlotChildren.push(...slotChild);
                     }
@@ -79,6 +79,13 @@ export class VirtualDOMMutator {
                 if (filteredSlotChildren && filteredSlotChildren.length) {
                     virtualElement.children = filteredSlotChildren;
                 }
+            }
+
+            // <st-slot unwrap="true" /> given -> transform st-slot into st-fragment
+            // so it gets evicted from the DOM
+            if (virtualElement.attributes && virtualElement.attributes.unwrap) {
+
+                virtualElements.splice(index, 1, ...virtualElement.children);
             }
         }
     };
@@ -102,6 +109,23 @@ export class VirtualDOMMutator {
         let maxLength = domElements.length > virtualElements.length ?
             domElements.length : virtualElements.length;
 
+        for (let i=0; i<maxLength; i++) {
+
+            // found an <st-slot> where contents may be rendered into
+            if (typeof virtualElements[i] === 'object' &&
+                (virtualElements[i] as VirtualElement).name === SLOT_ELEMENT_TAG_NAME) {
+
+                let prevLength = virtualElements.length;
+
+                // Apply <st-slot> transformation
+                VirtualDOMMutator.mutateSlotElement(parent, virtualElements, i);
+
+                if (virtualElements.length !== prevLength) {
+                    maxLength = virtualElements.length;
+                }
+            }
+        }
+
         // walk through max. possible  differences on this level of the subtree
         for (let i=0; i<maxLength; i++) {
 
@@ -114,33 +138,30 @@ export class VirtualDOMMutator {
 
             if (typeof virtualElements[i] === 'object') {
 
-                VirtualDOMMutator.mutateElement(parent, domElement, virtualElements[i] as VirtualElement, flowId)
+                VirtualDOMMutator.mutateElement(parent, domElement, virtualElements, i, flowId)
 
             } else {
 
-                VirtualDOMMutator.mutateTextNode(parent, domElement, virtualElements[i] as string, flowId);
+                VirtualDOMMutator.mutateTextNode(parent, domElement, virtualElements, i, flowId);
             }
         }
     }, [3 /* ignore flowId in memorization check */]);
 
-    static mutateElement = (parent: Element, domElement: Element, virtualElement: VirtualElement, flowId: number) => {
+    static mutateElement = (parent: Element, domElement: Element, virtualElements: Array<VirtualElement|string>, index: number, flowId: number) => {
+
+        let virtualElement = virtualElements[index] as VirtualElement;
 
         // mutation result states (apart from atomic attribute changes)
         let created = false;
         let replaced = false;
 
+        // found an element which needs to be rendered within an <st-slot>
         if (virtualElement && virtualElement.attributes && virtualElement.attributes.slot) {
 
             VirtualDOMMutator.mutateSlotChildrenElement(domElement);
 
             // ignore further rendering here; this gonna be rendered somewhere else
             return;
-        }
-
-        if (virtualElement && virtualElement.name === SLOT_ELEMENT_TAG_NAME) {
-
-            // Apply <st-slot> transformation
-            VirtualDOMMutator.mutateSlotElement(parent, virtualElement);
         }
 
         // mutation options per child element on each level:
@@ -265,7 +286,9 @@ export class VirtualDOMMutator {
         }
     };
 
-    static mutateTextNode = (parent: Element, domElement: Element, virtualElementTextContent: string, flowId: number) => {
+    static mutateTextNode = (parent: Element, domElement: Element, virtualElements: Array<VirtualElement|string>, index: number, flowId: number) => {
+
+        let virtualElementTextContent = virtualElements[index] as string;
 
         // text node content
         if (typeof virtualElementTextContent == 'undefined' && domElement) {
