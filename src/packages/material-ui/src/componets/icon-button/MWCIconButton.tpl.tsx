@@ -10,12 +10,6 @@ export default (view: MWCIconButton) => {
         'mdc-icon-button--on': view.on
     });
 
-    const iconClasses = classNames({
-        'material-icons': true,
-        'mdc-icon-button__icon': true,
-        'mdc-icon-button__icon--on': view.on
-    });
-
     const ariaLabel = view.label;
     const ariaPressed = view.on ? 'true' : 'false';
 
@@ -26,8 +20,9 @@ export default (view: MWCIconButton) => {
         aria-hidden={"true"} // TODO: Maybe dynamic
         aria-label={ariaLabel}
         aria-pressed={ariaPressed}>
-        <i class={iconClasses}>
-            {view.on ? view["name-on"] : view["name-off"]}
-        </i>
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">{view["name-on"]}</i>
+        <i class="material-icons mdc-icon-button__icon">{view["name-off"]}</i>
+
     </button>;
 }
+

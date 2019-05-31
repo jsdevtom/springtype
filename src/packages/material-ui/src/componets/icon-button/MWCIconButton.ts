@@ -34,18 +34,15 @@ export class MWCIconButton extends HTMLElement implements Lifecycle {
         protected iconButton: HTMLElement
     ) {
         super();
+
     }
 
-    onFlow(initial: boolean) {
-
-        if (initial && this.ripple) {
-            MDCRipple.attachTo(this.iconButton);
-        }
-    }
 
     toggleOnClick = () => {
         this.on = !this.on;
-        MDCRipple.attachTo(this.iconButton);
+        if (this.ripple) {
+            MDCRipple.attachTo(this.iconButton, {isUnbounded: true});
+        }
     }
 }
 

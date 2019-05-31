@@ -11,73 +11,97 @@
 
 </head>
 <body>
-    <div>
-        <mwc-button label="favorite" icon="favorite" trailing-icon="true">
+<div>
+    <mwc-button label="favorite" icon="favorite" trailing-icon="true">
 
-            <div>
+        <div>
 
-                <b>More!</b>
-            </div>
+            <b>More!</b>
+        </div>
 
-        </mwc-button>
-    </div>
-    <div>
-        <mwc-button label="disabled" disabled="true" raised="true"/>
-    </div>
-    <div>
-        <mwc-button label="disabled + icon" disabled="true" icon="house"/>
-    </div>
-    <div>
-        <mwc-button label="favorite" icon="favorite"/>
-    </div>
+    </mwc-button>
+</div>
+<div>
+    <mwc-button label="disabled" disabled="true" raised="true"/>
+</div>
+<div>
+    <mwc-button label="disabled + icon" disabled="true" icon="house"/>
+</div>
+<div>
+    <mwc-button label="favorite" icon="favorite"/>
+</div>
 
-    <div>
-        <mwc-button label="outlined" outlined="true"/>
-    </div>
-    <div>
-        <mwc-button label="raised" raised="true"/>
-    </div>
-    <div>
-        <mwc-checkbox checked="true" value="some_value_foo" onchange="console.log('foo', this);"/>
-    </div>
-    <div>
-        <mwc-checkbox checked="true" disabled="true" label="dfdfgdf"/>
-    </div>
-    <div>
-        <mwc-checkbox indeterminate="true" label="dfdfgdf"/>
-    </div>
+<div>
+    <mwc-button label="outlined" outlined="true"/>
+</div>
+<div>
+    <mwc-button label="raised" raised="true"/>
+</div>
+<div>
+    <mwc-checkbox checked="true" value="some_value_foo" onchange="console.log('foo', this);"/>
+</div>
+<div>
+    <mwc-checkbox checked="true" disabled="true" label="dfdfgdf"/>
+</div>
+<div>
+    <mwc-checkbox indeterminate="true" label="dfdfgdf"/>
+</div>
 
-    <div>
-        <mwc-radio checked="true" disabled="false" value="test2" name="test1" label="men"/>
-    </div>
-    <div>
-        <mwc-radio checked="true" disabled="false" value="test1" name="test1" label="female"/>
-    </div>
-    <div>
-        <mwc-select>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="vw">VW</option>
-            <option value="audi" selected>Audi</option>
-        </mwc-select>
-    </div>
-    <div>
-        <mwc-switch label="on/off" disabled="false"/>
-    </div>
-    <div>
-        <mwc-textfield label="Name" value="Max Mustermann" disabled variant="outlined"/>
-    </div>
-    <div>
-        <mwc-textfield label="Name" variant="outlined"/>
-    </div>
-    <div>
-        <mwc-textfield label="Name" variant="filled" helper-text="Some helper text"/>
-    </div>
-    <div>
-        Some material icon: <mwc-icon name="open_in_new" />
-    </div>
-    <div>
-        <mwc-icon-button name-on="music_note" name-off="music_off" />
-    </div>
+<div>
+    <mwc-radio checked="true" disabled="false" value="test2" name="test1" label="men"/>
+</div>
+<div>
+    <mwc-radio checked="true" disabled="false" value="test1" name="test1" label="female"/>
+</div>
+<div>
+    <mwc-select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="vw">VW</option>
+        <option value="audi" selected>Audi</option>
+    </mwc-select>
+</div>
+<div>
+    <mwc-switch label="on/off" disabled="false"/>
+</div>
+<div>
+    <mwc-textfield label="Name" value="Max Mustermann" disabled variant="outlined"/>
+</div>
+<div>
+    <mwc-textfield label="Name" variant="outlined"/>
+</div>
+<div>
+    <mwc-textfield label="Name" variant="filled" helper-text="Some helper text"/>
+</div>
+<div>
+    Some material icon:
+    <mwc-icon name="open_in_new"/>
+</div>
+<div>
+    <mwc-icon-button name-on="music_note" name-off="music_off"/>
+</div>
+<div>
+    <mwc-card>
+    </mwc-card>
+</div>
+<div>
+    <mwc-button label="READ" outlined="true"></mwc-button>
+    <mwc-button label="BOOKMARK" outlined="true"></mwc-button>
+    <mwc-icon name="open_in_new"></mwc-icon>
+</div>
+
+<div>
+    <mwc-icon-button name-on="favorite" name-off="favorite_border"></mwc-icon-button>
+
+    <button id="add-to-favorites"
+            class="mdc-icon-button"
+            aria-label="Add to favorites"
+            aria-hidden="true"
+            aria-pressed="false">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
+        <i class="material-icons mdc-icon-button__icon">favorite_border</i>
+    </button>
+
+</div>
 </body>
 </html>
