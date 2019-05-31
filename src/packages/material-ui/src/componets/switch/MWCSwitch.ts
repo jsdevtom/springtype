@@ -7,7 +7,7 @@ import {
     Template,
     Partial
 } from "@springtype/core";
-import template from "./MWCCheckbox.tpl";
+import template from "./MWCSwitch.tpl";
 import style from "./MWCSwitch.tss";
 import {MDCRipple} from "@material/ripple/component";
 
@@ -18,9 +18,6 @@ export class MWCSwitch extends HTMLElement implements Lifecycle {
 
     @Attribute(AttributeType.BOOLEAN)
     checked = false;
-
-    @Attribute(AttributeType.BOOLEAN)
-    indeterminate = false;
 
     @Attribute(AttributeType.BOOLEAN)
     disabled = false;
@@ -35,19 +32,24 @@ export class MWCSwitch extends HTMLElement implements Lifecycle {
     label = '';
 
     @EventAttribute
-    onchange = (evt: Event) => {};
+    onchange = (evt: Event) => {
+    };
 
-    constructor(protected checkbox: HTMLInputElement) {
+    constructor(protected _switch: HTMLInputElement,
+                protected ripple: HTMLDivElement) {
         super();
 
     }
 
     onFlow(initial: boolean) {
-        if (initial && this.indeterminate) {
-            this.checkbox.indeterminate = true;
+        if (initial && this.ripple) {
+            MDCRipple.attachTo(this.ripple);
         }
     }
 
+    onSwitchChange = (evt: Event) => {
+        this.checked = this._switch.checked;
+    }
 }
 
 declare global {

@@ -38,7 +38,7 @@
         <mwc-button label="raised" raised="true"/>
     </div>
     <div>
-        <mwc-checkbox checked="true" value="ddgdg" onchange="console.log('foo', this);"/>
+        <mwc-checkbox checked="true" value="some_value_foo" onchange="console.log('foo', this);"/>
     </div>
     <div>
         <mwc-checkbox checked="true" disabled="true" label="dfdfgdf"/>
@@ -63,6 +63,18 @@
     </div>
     <div>
         <mwc-switch label="on/off" disabled="false"/>
+    </div>
+    <div>
+        <mwc-textfield label="Name" value="Max Mustermann" disabled variant="outlined"/>
+    </div>
+    <div>
+        <mwc-textfield label="Name" variant="outlined"/>
+    </div>
+    <div>
+        <mwc-textfield label="Name" variant="filled" helper-text="Some helper text"/>
+    </div>
+    <div>
+        Some material icon: <mwc-icon name="open_in_new" />
     </div>
 </body>
 </html>

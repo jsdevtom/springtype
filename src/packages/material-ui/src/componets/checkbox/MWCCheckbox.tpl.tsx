@@ -2,6 +2,7 @@ import {MWCCheckbox} from "./MWCCheckbox";
 import {VirtualElement, ActiveRenderer} from "@springtype/core";
 import classNames from "classnames";
 import "@material/checkbox/dist/mdc.checkbox.min.css"
+import "@material/form-field/dist/mdc.form-field.min.css"
 
 export default (view: MWCCheckbox) => {
 
