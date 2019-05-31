@@ -1,15 +1,6 @@
-import {
-    Attribute, AttributeType,
-    Element,
-    EventAttribute,
-    Lifecycle,
-    Style,
-    Template,
-    Partial
-} from "@springtype/core";
+import {Attribute, AttributeType, Element, EventAttribute, Lifecycle, Partial, Style, Template} from "@springtype/core";
 import template from "./MWCCheckbox.tpl";
 import style from "./MWCCheckbox.tss";
-import {MDCRipple} from "@material/ripple/component";
 
 @Element('mwc-checkbox')
 @Template(template)
