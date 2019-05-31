@@ -1,7 +1,7 @@
 import {Attribute, AttributeType, Element, Lifecycle, Partial, Style, Template} from "@springtype/core";
 import template from "./MWCIcon.tpl";
 import style from "./MWCIcon.tss";
-import {CSSUnit} from "@springtype/core/src/tss/src/constant/CSSUnit";
+import {CSSUnit} from "@springtype/core";
 
 @Element('mwc-icon')
 @Template(template)

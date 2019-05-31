@@ -6,3 +6,4 @@ export * from "./src/interface/StyleFunction";
 export * from "./src/interface/TypedStyleSheet";
 export * from "./src/interface/TemplateStringStyleSheet";
 export * from "./src/context/theme";
+export * from "./src/enum/CSSUnit";
