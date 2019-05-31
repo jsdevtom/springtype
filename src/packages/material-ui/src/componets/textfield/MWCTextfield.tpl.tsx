@@ -60,18 +60,21 @@ export default (view: MWCTextfield) => {
     if (view.disabled) {
         inputElement.attributes.disabled = true;
     }
+
+    const helper = view["helper-text"] ? <div class={classNames({
+        'mdc-text-field-helper-line': true,
+        'no-display': !view['helper-text']
+    })}>
+        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">{view['helper-text']}</div>
+    </div> : '';
     return <st-fragment>
         <div class={classes} aria-label={ariaLabel}>
             {view.variant === 'outlined' ? outlineLabel(view) : filledLabel(view)}
             {inputElement}
             {mdcIcon(view['icon'])}
         </div>
-        <div class={classNames({
-            'mdc-text-field-helper-line': true,
-            'no-display': !view['helper-text']
-        })}>
-            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">{view['helper-text']}</div>
-        </div>
+        {helper}
+
     </st-fragment>;
 }
 
