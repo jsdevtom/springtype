@@ -2,15 +2,17 @@ import {MWCSwitch} from "./MWCSwitch";
 import {VirtualElement, ActiveRenderer} from "@springtype/core";
 import classNames from "classnames";
 import "@material/switch/dist/mdc.switch.min.css"
+import '@material/form-field/dist/mdc.form-field.min.css';
 
 export default (view: MWCSwitch) => {
 
     const classes = classNames({
         'mdc-switch': true,
         'mdc-switch--disabled': view.disabled,
+        'mdc-switch--checked': view.checked,
     });
 
-    const inputElement: VirtualElement = <input  inject={{checkbox: view}}  type="checkbox" id="switch" class="mdc-switch__native-control"/>;
+    const inputElement: VirtualElement = <input onchange={view.onSwitchChange} inject={{_switch: view}}  type="checkbox" id="switch" class="mdc-switch__native-control"/>;
     if (view.checked) {
         inputElement.attributes.checked = true;
     }
@@ -26,7 +28,7 @@ export default (view: MWCSwitch) => {
 
     return <div class="mdc-form-field">
         <div class={classes}>
-            <div class="mdc-switch__track"></div>
+            <div inject={{ripple: view}} class="mdc-switch__track"/>
             <div class="mdc-switch__thumb-underlay">
                 <div class="mdc-switch__thumb">
                     {inputElement}
