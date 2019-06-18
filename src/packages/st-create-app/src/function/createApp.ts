@@ -13,8 +13,8 @@ import {dependencies} from "../definition/dependencies";
 import {logErrors} from "./logErrors";
 import {devDependencies} from "../definition/devDependencies";
 import {isSafeToCreateAppIn} from "./isSafeToCreateAppIn";
-import {createElement} from "../../../st-create-element/src/function/createElement";
-import {printHeader} from "../../../cli-common/src/function/printHeader";
+import {createElement} from "../../../st-create-component/src/function/createElement";
+import {printHeader} from "../../../cli-common";
 import {appElementTemplate} from "../templates/appElementTemplate";
 import appElementStyleTemplate from "../templates/appElementStyleTemplate";
 
