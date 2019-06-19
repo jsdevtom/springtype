@@ -1,4 +1,4 @@
-const getSelectedSpringTypeElementStyle = () => {
+const getSelectedSpringTypeComponentStyle = () => {
 
     const styles = {__proto__: null};
 
@@ -30,13 +30,13 @@ const getSelectedSpringTypeElementStyle = () => {
         } else if (
             Reflect.get($0.constructor, 'SHADOW') &&
             Reflect.get($0.constructor, 'SHADOW_ATTACH_MODE') === 'closed') {
-            styles['Warning'] = 'This Element is attached in closed Shadow DOM mode. Style is not exposed.';
+            styles['Warning'] = 'This Component is attached in closed Shadow DOM mode. Style is not exposed.';
 
         } else {
-            styles['Error'] = 'This Element has a style function but is not conform to the Element API.'
+            styles['Error'] = 'This Component has a style function but is not conform to the Component API.'
         }
     } else {
-        styles['Info'] = 'This Element has no @Style(styleSheet) decoration.';
+        styles['Info'] = 'This Component has no @Style(styleSheet) decoration.';
     }
     return styles
 };
@@ -44,7 +44,7 @@ const getSelectedSpringTypeElementStyle = () => {
 chrome.devtools.panels.elements.createSidebarPane("SpringType Style", (sidebar) => {
 
     const updateElementProperties = () => {
-        sidebar.setExpression("(" + getSelectedSpringTypeElementStyle.toString() + ")()", 'SpringType Style');
+        sidebar.setExpression("(" + getSelectedSpringTypeComponentStyle.toString() + ")()", 'SpringType Style');
     };
 
     updateElementProperties();

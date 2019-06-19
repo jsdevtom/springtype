@@ -1,8 +1,8 @@
-const getSelectedSpringTypeElement = () => {
+const getSelectedSpringTypeComponent = () => {
     const data = {__proto__: null};
 
     if (Reflect.get($0.constructor, 'TAG_NAME')) {
-        data['@Element'] = Reflect.get($0.constructor, 'TAG_NAME');
+        data['@Component'] = Reflect.get($0.constructor, 'TAG_NAME');
     }
 
     if (Reflect.get($0.constructor, 'SHADOW')) {
@@ -44,23 +44,23 @@ const getSelectedSpringTypeElement = () => {
 
     data['$instance'] = $0;
 
-    // SpringType Element data
-    window.$ste = data;
+    // SpringType Component data
+    window.$stc = data;
 
     return data;
 };
 
-chrome.devtools.panels.elements.createSidebarPane("SpringType Element", (sidebar) => {
+chrome.devtools.panels.elements.createSidebarPane("SpringType Component", (sidebar) => {
 
-    const updateElementProperties = () => {
-        sidebar.setExpression("(" + getSelectedSpringTypeElement.toString() + ")()", 'SpringType Element');
+    const updateComponentProperties = () => {
+        sidebar.setExpression("(" + getSelectedSpringTypeComponent.toString() + ")()", 'SpringType Component');
     };
 
-    updateElementProperties();
+    updateComponentProperties();
 
     // TODO: Update data on dynamic change
     // https://stackoverflow.com/questions/17214171/chrome-devtools-extension-how-to-get-selected-element-from-elements-panel-in-co
     // https://developer.mozilla.org/de/docs/Web/API/MutationObserver
 
-    chrome.devtools.panels.elements.onSelectionChanged.addListener(updateElementProperties);
+    chrome.devtools.panels.elements.onSelectionChanged.addListener(updateComponentProperties);
 });

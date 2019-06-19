@@ -9,11 +9,11 @@ const getApplicationContext = () => {
 
 chrome.devtools.panels.elements.createSidebarPane("SpringType Runtime", (sidebar) => {
 
-    const updateElementProperties = () => {
+    const updateComponetProperties = () => {
         sidebar.setExpression("(" + getApplicationContext.toString() + ")()", 'Application Context');
     };
 
-    updateElementProperties();
+    updateComponetProperties();
 
-    chrome.devtools.panels.elements.onSelectionChanged.addListener(updateElementProperties);
+    chrome.devtools.panels.elements.onSelectionChanged.addListener(updateComponetProperties);
 });

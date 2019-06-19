@@ -1,11 +1,16 @@
 var panelCreated = false;
 
 function createPanelIfSpringTypeLoaded() {
-    if (panelCreated) {
-        return;
-    }
+
     chrome.devtools.inspectedWindow.eval(`!!((window.$st))`, function(pageHasSpringType, err) {
-        if (!pageHasSpringType || panelCreated) {
+        if (!pageHasSpringType) {
+            return;
+        }
+
+        //set the icon by reload, if panel is already created
+        setIconAndPopup('development');
+
+        if (panelCreated) {
             return;
         }
 
@@ -22,7 +27,6 @@ function createPanelIfSpringTypeLoaded() {
             });
         });
 
-        setIconAndPopup('development');
     });
 }
 
@@ -46,8 +50,8 @@ chrome.devtools.network.onNavigated.addListener(function() {
     createPanelIfSpringTypeLoaded();
 });
 
+//https://developer.chrome.com/extensions/devtools#detecting-open-close
 var loadCheckInterval = setInterval(function() {
+    // endless loop to check if devtools open
     createPanelIfSpringTypeLoaded();
 }, 1000);
-
-createPanelIfSpringTypeLoaded();
