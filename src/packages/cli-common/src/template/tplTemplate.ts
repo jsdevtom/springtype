@@ -1,15 +1,15 @@
-import {kebabToCamelCase} from "../function/kebabToCamelCase";
+import {kebabToCamelCase} from "../function";
 import {springTypeCorePackageDependency} from "../../../st-create-app/src/definition/dependencies";
 
-export const tplTemplate = (elementName: string, tpl: string = '') => {
+export const tplTemplate = (componentName: string, tpl: string = '') => {
 
-    const elementClassName = kebabToCamelCase(elementName);
+    const componentClassName = kebabToCamelCase(componentName);
 
-    tpl = tpl ? tpl : `<div>${elementName}</div>`;
+    tpl = tpl ? tpl : `<div>${componentName}</div>`;
 
     return `import {ActiveRenderer} from '${springTypeCorePackageDependency}';
-import {${elementClassName}} from "./${elementName}";
+import {${componentClassName}} from "./${componentName}";
 
-export default (element: ${elementClassName}) => ${tpl};
+export default (component: ${componentClassName}) => ${tpl};
 `;
 };

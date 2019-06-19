@@ -1,9 +1,9 @@
-import {kebabToCamelCase} from "../function/kebabToCamelCase";
+import {kebabToCamelCase} from "../function";
 import {springTypeCorePackageDependency} from "../../../st-create-app/src/definition/dependencies";
 
-export const styleTemplate = (elementName: string, style: any = {}) => {
+export const styleTemplate = (componentName: string, style: any = {}) => {
 
-    const elementClassName = kebabToCamelCase(elementName);
+    const componentClassName = kebabToCamelCase(componentName);
 
     if (!style) {
         style = {};
@@ -14,7 +14,7 @@ export const styleTemplate = (elementName: string, style: any = {}) => {
     }
 
     return `import {TypedStyleSheet} from "${springTypeCorePackageDependency}";
-import {${elementClassName}} from "./${elementName}";
+import {${componentClassName}} from "./${componentName}";
 
-export default (element: ${elementClassName}, theme: any): TypedStyleSheet => (${JSON.stringify(style, null, 4)});`;
+export default (component: ${componentClassName}, theme: any): TypedStyleSheet => (${JSON.stringify(style, null, 4)});`;
 };
