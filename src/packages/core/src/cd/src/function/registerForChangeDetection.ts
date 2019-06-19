@@ -1,6 +1,6 @@
 import {createFieldChangeDetector} from "./createFieldChangeDetector";
 import {ChangeDetectionInterceptor} from "../interface/ChangeDetectionInterceptor";
-import {ComponentReflector} from "../../../di";
+import {BeanReflector} from "../../../di";
 
 export const registerForChangeDetection = (
     prototype: any,
@@ -10,7 +10,7 @@ export const registerForChangeDetection = (
     onBeforeChange: ChangeDetectionInterceptor = (instance: any, name: string|number|symbol, value: any) => true,
 ) => {
 
-    ComponentReflector.addInitializer(prototype, (instance: any) => {
+    BeanReflector.addInitializer(prototype, (instance: any) => {
         createFieldChangeDetector(instance, fieldName, memorize, onChange, onBeforeChange);
     });
 };

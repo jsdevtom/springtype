@@ -1,7 +1,7 @@
 import {transformToFlatElementList, VirtualDOMTransformer, VirtualElement} from "../../../virtualdom";
 import {CSSDeclarationBlockGenerator, CSSInlineStyleGenerator, getTheme} from "../../../tss";
-import {ComponentReflector} from "../../../di";
-import {ComponentImpl} from "../../../di/src/interface/ComponentImpl";
+import {BeanReflector} from "../../../di";
+import {BeanImpl} from "../../../di/src/interface/BeanImpl";
 import {getAttributeReferencedValue} from "./getAttributeReferencedValue";
 import {getAttributeEventListenerValue} from "./getAttributeEventListenerValue";
 import {getObservedAttributes} from "../reflector/protoype/observedAttributes";
@@ -14,7 +14,7 @@ import {Merge, Partial} from "../../../lang";
 
 const VIRTUAL_DOM = 'VIRTUAL_DOM';
 
-export const createWebComponentClass = (tagName: string, injectableWebComponent: ComponentImpl<any>) => {
+export const createWebComponentClass = (tagName: string, injectableWebComponent: BeanImpl<any>) => {
 
     // custom web component extends user implemented web component class
     // which extends HTMLElement
@@ -25,7 +25,7 @@ export const createWebComponentClass = (tagName: string, injectableWebComponent:
 
             // call all registered initializer functions for this WebComponent as BeanFactory is not
             // creating instances of WebComponents but document.createElement. Thus, we need to do it here.
-            ComponentReflector.callInitializers(ComponentReflector.getInitializers(CustomWebComponent), this);
+            BeanReflector.callInitializers(BeanReflector.getInitializers(CustomWebComponent), this);
         }
 
         static get observedAttributes() {

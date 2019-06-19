@@ -1,5 +1,5 @@
 import {ShadowAttachMode} from "../../index";
-import {ComponentReflector} from "../../../di";
+import {BeanReflector} from "../../../di";
 import {
     getShadowAttachModeForComponent,
     getShadowForComponent,
@@ -16,7 +16,7 @@ export const decorateShadowAndAttachModeForComponent = (webComponent: any, shado
         setShadowAttachModeForComponent(webComponent, shadowAttachMode);
     }
 
-    ComponentReflector.addInitializer(webComponent, (instance: any) => {
+    BeanReflector.addInitializer(webComponent, (instance: any) => {
 
         const shadow = getShadowForComponent(webComponent);
 

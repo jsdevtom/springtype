@@ -1,4 +1,4 @@
-import {ComponentReflector} from "../ComponentReflector";
+import {BeanReflector} from "../BeanReflector";
 import {ApplicationContext} from "../ApplicationContext";
 import {InjectionProfile} from "../enum/InjectionProfile";
 import {InjectionReference} from "../type/InjectionReference";
@@ -7,7 +7,7 @@ import {ArgumentsInjectionMetadata} from "../interface/ArgumentsInjectionMetadat
 export function resolveInjectionArgumentValue(
     argumentsInjectionMetaData: ArgumentsInjectionMetadata,
     index: number,
-    isTestComponent: boolean
+    isTestBean: boolean
 ) {
 
     let injectionValue: any;
@@ -21,12 +21,12 @@ export function resolveInjectionArgumentValue(
 
         if (typeof injectionReference === 'function') {
 
-            if (ComponentReflector.isComponent(injectionReference)) {
+            if (BeanReflector.isBean(injectionReference)) {
 
                 // it is not a InjectBeanFactory, just use the instance
                 injectionValue = ApplicationContext.getInstance().getBean(
                     injectionReference,
-                    isTestComponent ? InjectionProfile.TEST : InjectionProfile.DEFAULT,
+                    isTestBean ? InjectionProfile.TEST : InjectionProfile.DEFAULT,
                     argumentsInjectionMetaData.arguments[index].injectionStrategy,
                 );
 

@@ -6,7 +6,7 @@ in a way that it feels comfortable for most used features.
 
 However, SpringType concentrates on features that are pragmatically usable for
 modern web development. Thus, we abandoned many out-dated approaches like XML-based
-bean configuration and component scanning. 
+bean configuration and bean scanning. 
 
 TypeScript is a typed superset of next-gen JavaScript and thus it comes with
 many features that allow for a more elegant implementation of the core ideas.
@@ -52,16 +52,16 @@ This is, where Dependency Injection and Inversion of Control comes into play:
 
 Lets take a deep dive into how we implemented the dependency injection framework:
 
-#### Components (`@Component`)
+#### Beans (`@Bean`)
 
-Classes that are injectable as dependencies for other classes are called components.
-Each component class should be annotated by the decorator `@Component`.
+Classes that are injectable as dependencies for other classes are called beans.
+Each bean class should be annotated by the decorator `@Bean`.
 
 #### `BeanFactory`'s
 
 Every object (class instance) that can be injected as a dependency is resolved by the
 algorithms implemented in `class BeanFactory`. This class also has a `registry` object to know
-about all components. Whenever the BeanFactory needs to create an instance of a component
+about all beans. Whenever the BeanFactory needs to create an instance of a bean
 in order to inject it as a dependency for another classes instance, it remembers the
 first instance of it's class in the `singletonInstances` object.
 
@@ -89,11 +89,11 @@ It should be self-explanatory and simply not possible to "use it wrong".
 
 Whenever you refer to a class in a constructor argument and doesn't give it a default value, 
 the DI will inject a singleton instance of this class. It is important that those classes are 
-annotated with `@Component`.
+annotated with `@Bean`.
 
 Example:
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         constructor(test: Test) {
@@ -108,7 +108,7 @@ above the method definition.
 
 Example:
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         @Autowired
@@ -128,7 +128,7 @@ Lets assume you want to inject a new instance instead of injecting a singleton i
 
 Example:
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         @Autowired
@@ -144,7 +144,7 @@ Sometimes, a specific sub-class of an abstract superclass is desired to be injec
 
 Example:
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         @Autowired
@@ -172,7 +172,7 @@ Example:
         return tests;
     }
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         @Autowired
@@ -189,7 +189,7 @@ specified type. This is desired type-unsafety for the developers ease:
 
 Example:
 
-    @Component
+    @Bean
     export class HelloWorld {
     
         @Autowired
@@ -212,7 +212,7 @@ on a granular per-class level at design time.
 
 Example:
 
-    @Component({
+    @Bean({
         mockedBy: TestMock
     })
     export class Test {
@@ -233,7 +233,7 @@ Example:
     
     // you can decide if you extend Test or not
     
-    @Component
+    @Bean
     export class TestMock extends Test {
     
         // no injections
@@ -268,14 +268,14 @@ never need to care for manual mocking anymore.
 You can hook into instances before the constructor is being invoked and run code 
 using instance initializer:
 
-    @Component
+    @Bean
     export class Foo {
         constructor() {
             console.log('Hello Foo');
         }
     }
 
-    ComponentReflector.addInitializer(Foo, (instance: any) => {
+    beanReflector.addInitializer(Foo, (instance: any) => {
         console.log('being called before "Hello Foo" is printed.', instance);
     });
 

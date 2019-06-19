@@ -1,4 +1,4 @@
-import {ComponentReflector} from "../ComponentReflector";
+import {BeanReflector} from "../BeanReflector";
 import {InjectionStrategy} from "../enum/InjectionStrategy";
 import {InjectionReference} from "../type/InjectionReference";
 
@@ -12,7 +12,7 @@ export function Inject(
         if (typeof targetClassInstanceOrCtor === 'function') {
 
             // case: param on constructor function
-            ComponentReflector.setConstructorArgumentsInjectionMetadata(
+            BeanReflector.setConstructorArgumentsInjectionMetadata(
                 targetClassInstanceOrCtor,
                 argumentIndex,
                 injectionReference,
@@ -22,7 +22,7 @@ export function Inject(
         } else {
 
             // case: param on method
-            ComponentReflector.setMethodArgumentsInjectionMetadata(
+            BeanReflector.setMethodArgumentsInjectionMetadata(
                 targetClassInstanceOrCtor,
                 argumentIndex,
                 propertyKey,

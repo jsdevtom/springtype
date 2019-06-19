@@ -1,4 +1,4 @@
-import {ComponentReflector} from "../ComponentReflector";
+import {BeanReflector} from "../BeanReflector";
 import {ApplicationContext} from "../ApplicationContext";
 import {InjectionProfile} from "../enum/InjectionProfile";
 import {ArgumentsInjectionMetadata} from "../interface/ArgumentsInjectionMetadata";
@@ -6,7 +6,7 @@ import {resolveInjectionArgumentValue} from "../function/resolveInjectionArgumen
 
 export function Autowired(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function | any>) {
 
-    const methodArgumentTypes = ComponentReflector.getMethodArgumentTypes(target, propertyName);
+    const methodArgumentTypes = BeanReflector.getMethodArgumentTypes(target, propertyName);
 
     // backup original method
     const method: Function = <Function> descriptor.value;
@@ -14,19 +14,19 @@ export function Autowired(target: any, propertyName: string, descriptor: TypedPr
     // we replace the method again, the call the original impl. with injected arguments
     descriptor.value = function() {
 
-        const cmp = ApplicationContext.getInstance().getComponent(target.constructor);
+        const cmp = ApplicationContext.getInstance()._getBean(target.constructor);
 
         if (!cmp) {
-            throw new Error('@Autowired on methods requires @Component on the class.');
+            throw new Error('@Autowired on methods requires @Bean on the class.');
         }
 
-        const isTestComponent = ComponentReflector.getIsMockComponent(
+        const isTestBean = BeanReflector.getIsMockBean(
             cmp
         );
 
         // replacement method impl. -> this is called when the actual @BeanMethod annotated method is called (hook)
         const argumentsInjectionMetaData: ArgumentsInjectionMetadata =
-            ComponentReflector.getMethodArgumentsInjectionMetadata(
+            BeanReflector.getMethodArgumentsInjectionMetadata(
                 target, propertyName
             );
 
@@ -46,7 +46,7 @@ export function Autowired(target: any, propertyName: string, descriptor: TypedPr
             for (let i=0; i<argumentsInjectionMetaData.arguments.length; i++) {
 
                 // resolve override injection argument
-                const injectionValue = resolveInjectionArgumentValue(argumentsInjectionMetaData, i, isTestComponent);
+                const injectionValue = resolveInjectionArgumentValue(argumentsInjectionMetaData, i, isTestBean);
 
                 // conditionally overwrite original call argument for sub-call
                 if (typeof injectionValue !== 'undefined') {
@@ -61,7 +61,7 @@ export function Autowired(target: any, propertyName: string, descriptor: TypedPr
                         // fetch singleton from cache by reflected type
                         newArgs[i] = ApplicationContext.getInstance().getBean(
                             methodArgumentTypes[i],
-                            isTestComponent ? InjectionProfile.TEST : InjectionProfile.DEFAULT,
+                            isTestBean ? InjectionProfile.TEST : InjectionProfile.DEFAULT,
                             argumentsInjectionMetaData.arguments[i].injectionStrategy
                         );
                     }
@@ -74,12 +74,12 @@ export function Autowired(target: any, propertyName: string, descriptor: TypedPr
         for (let i=arguments.length; i<methodArgumentTypes.length; i++) {
 
             if (typeof newArgs[i] === 'undefined' &&
-                ComponentReflector.isComponent(methodArgumentTypes[i])) {
+                BeanReflector.isBean(methodArgumentTypes[i])) {
 
 
                 newArgs[i] = ApplicationContext.getInstance().getBean(
                     methodArgumentTypes[i],
-                    isTestComponent ? InjectionProfile.TEST : InjectionProfile.DEFAULT
+                    isTestBean ? InjectionProfile.TEST : InjectionProfile.DEFAULT
                 );
             }
         }

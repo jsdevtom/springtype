@@ -1,15 +1,15 @@
-import {ApplicationContext, ComponentImpl} from "../../di";
+import {ApplicationContext, BeanImpl} from "../../di";
 
 const TAG_NAME = 'TAG_NAME';
 const WEB_COMPONENTS_REGISTERED = 'WEB_COMPONENTS_REGISTERED';
 
 export class WebComponentReflector {
 
-    static getTagName(component: ComponentImpl<any>): string {
+    static getTagName(component: BeanImpl<any>): string {
         return Reflect.get(component, TAG_NAME);
     }
 
-    static setTagName(component: ComponentImpl<any>, tagName: string): void {
+    static setTagName(component: BeanImpl<any>, tagName: string): void {
         Reflect.set(component, TAG_NAME, tagName);
     }
 

@@ -1,4 +1,4 @@
-import {ComponentReflector} from "../../../di";
+import {BeanReflector} from "../../../di";
 import {decorateTransparentAttributeGetterAndSetter} from "../function/decorateTransparentAttributeGetterAndSetter";
 import {warn} from '../../../logger';
 import {getObservedAttributes, setObservedAttributes} from "../reflector/protoype/observedAttributes";
@@ -61,7 +61,7 @@ export function Attribute(webComponentInstanceOrTransformFnOrAttributeType: Attr
 
         setObservedAttributes(webComponentInstance.constructor, observedAttributes);
 
-        ComponentReflector.addInitializer(webComponentInstance.constructor, (instance: any) => {
+        BeanReflector.addInitializer(webComponentInstance.constructor, (instance: any) => {
 
             initializeAttributes(instance, webComponentInstance.constructor, observedAttributes);
 

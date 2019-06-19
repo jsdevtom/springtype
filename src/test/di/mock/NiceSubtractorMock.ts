@@ -1,7 +1,7 @@
-import {Component} from "@springtype/core";
+import {Bean} from "@springtype/core";
 import {AbstractSubtractor} from "../helper/AbstractSubtractor";
 
-@Component
+@Bean
 export class NiceSubtractorMock extends AbstractSubtractor {
 
     subtract(a: number, b: number): number {

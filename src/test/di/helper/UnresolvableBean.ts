@@ -1,4 +1,4 @@
-// explicit no @Component annotation!
+// explicit no @Bean annotation!
 export class UnresolvableBean {
 
     test() {

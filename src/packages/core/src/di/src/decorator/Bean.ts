@@ -1,13 +1,13 @@
 // MUST be imported here
 import "reflect-metadata";
 
-import {ComponentImpl} from "../interface/ComponentImpl";
+import {BeanImpl} from "../interface/BeanImpl";
 import {BeanConfig} from "../interface/BeanConfig";
 import {registerBean} from "../function/registerBean";
 
-export function Component<T extends ComponentImpl<any>>(beanConfigOrCtor?: BeanConfig<T>|T): T|any {
+export function Bean<T extends BeanImpl<any>>(beanConfigOrCtor?: BeanConfig<T>|T): T|any {
 
-    // called with @Component - no beanConfig object
+    // called with @Bean - no beanConfig object
     if (!(typeof beanConfigOrCtor === 'function')) {
 
         return (target: T) => {
@@ -16,7 +16,7 @@ export function Component<T extends ComponentImpl<any>>(beanConfigOrCtor?: BeanC
 
     } else {
 
-        // called with @Component() or @Component({ ... })
+        // called with @Bean() or @Bean({ ... })
         return registerBean(<T> beanConfigOrCtor);
     }
 }

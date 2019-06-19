@@ -1,4 +1,4 @@
-import {Autowired, Component, Inject} from "@springtype/core";
+import {Autowired, Bean, Inject} from "@springtype/core";
 import {Multiplier} from "./Multiplier";
 import {Subtractor} from "./Subtractor";
 import {UnresolvableBean} from "../helper/UnresolvableBean";
@@ -7,7 +7,7 @@ function customLocalMultiplierFactory() {
     return new Multiplier(new UnresolvableBean());
 }
 
-@Component
+@Bean
 export class Gain {
 
     // default injection strategy is: InjectionStrategy.SINGLETON

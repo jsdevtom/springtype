@@ -1,5 +1,5 @@
 import {InjectionStrategy} from "./enum/InjectionStrategy";
-import {ComponentImpl} from "./interface/ComponentImpl";
+import {BeanImpl} from "./interface/BeanImpl";
 import {BeanConfig} from "./interface/BeanConfig";
 import {ArgumentsInjectionMetadata} from "./interface/ArgumentsInjectionMetadata";
 import {createDefaultArgumentsInjectionMetadata} from "./function/createDefaultArgumentsInjectionMetadata";
@@ -9,12 +9,12 @@ import {ConstructorArgumentInitializer} from "./interface/ConstructorArgumentIni
 import {ConstructorArgumentInitializerFunction} from "./interface/ConstructorArgumentInitializerFunction";
 import {INJECT_DECORATOR_METADATA_KEY} from "./function/registerBean";
 
-const COMPONENT = 'COMPONENT';
-const COMPONENT_CONFIG = 'COMPONENT_CONFIG';
-const COMPONENT_CONSTRUCTOR_PARAMETER_METADATA = 'COMPONENT_CONSTRUCTOR_PARAMETER_METADATA';
-const COMPONENT_INITIALIZERS = 'COMPONENT_INITIALIZERS';
-const COMPONENT_IS_MOCK_FLAG = 'COMPONENT_IS_MOCK_FLAG';
-const COMPONENT_NAME = 'COMPONENT_NAME';
+const BEAN = 'BEAN';
+const BEAN_CONFIG = 'BEAN_CONFIG';
+const BEAN_CONSTRUCTOR_PARAMETER_METADATA = 'BEAN_CONSTRUCTOR_PARAMETER_METADATA';
+const BEAN_INITIALIZERS = 'BEAN_INITIALIZERS';
+const BEAN_IS_MOCK_FLAG = 'BEAN_IS_MOCK_FLAG';
+const BEAN_NAME = 'BEAN_NAME';
 const CONSTRUCTOR_ARGUMENT_INITIALIZERS = 'CONSTRUCTOR_ARGUMENT_INITIALIZERS';
 const RESOLVED_CONSTRUCTOR_ARGUMENTS = 'RESOLVED_CONSTRUCTOR_ARGUMENTS';
 
@@ -25,52 +25,52 @@ const RESOLVED_CONSTRUCTOR_ARGUMENTS = 'RESOLVED_CONSTRUCTOR_ARGUMENTS';
  * Calls to Reflect.getMetadata() point to TypeScript compiler generated
  * metadata. All other Reflect.* calls deal with runtime metadata (from decorators, BeanFactory).
  */
-export class ComponentReflector {
+export class BeanReflector {
 
-    static setIsMockComponent(componentCtor: ComponentImpl<any>): void {
-        Reflect.set(componentCtor, COMPONENT_IS_MOCK_FLAG, true);
+    static setIsMockBean(beanCtor: BeanImpl<any>): void {
+        Reflect.set(beanCtor, BEAN_IS_MOCK_FLAG, true);
     }
 
-    static getIsMockComponent(componentCtor: ComponentImpl<any>): boolean {
-        return !!Reflect.get(componentCtor, COMPONENT_IS_MOCK_FLAG);
+    static getIsMockBean(beanCtor: BeanImpl<any>): boolean {
+        return !!Reflect.get(beanCtor, BEAN_IS_MOCK_FLAG);
     }
 
-    static getMethodArgumentTypes(componentCtor: ComponentImpl<any>, propertyName: string) {
-        return Reflect.getMetadata('design:paramtypes', componentCtor, propertyName) || [];
+    static getMethodArgumentTypes(beanCtor: BeanImpl<any>, propertyName: string) {
+        return Reflect.getMetadata('design:paramtypes', beanCtor, propertyName) || [];
     }
 
-    static getConstructorArgumentTypes(componentCtor: ComponentImpl<any>): Array<ComponentImpl<any>> {
-        return Reflect.getMetadata('design:paramtypes', componentCtor) || [];
+    static getConstructorArgumentTypes(beanCtor: BeanImpl<any>): Array<BeanImpl<any>> {
+        return Reflect.getMetadata('design:paramtypes', beanCtor) || [];
     }
 
     static register(
-        componentCtor: ComponentImpl<any>,
+        beanCtor: BeanImpl<any>,
         parameterInjectionMetadata: ArgumentsInjectionMetadata,
-        beanConfig?: BeanConfig<ComponentImpl<any>>,
+        beanConfig?: BeanConfig<BeanImpl<any>>,
     ): void {
 
-        Reflect.set(componentCtor, COMPONENT_CONFIG, beanConfig);
-        Reflect.set(componentCtor, COMPONENT, Symbol(componentCtor.name));
-        Reflect.set(componentCtor, COMPONENT_NAME, componentCtor.name);
-        Reflect.set(componentCtor, COMPONENT_CONSTRUCTOR_PARAMETER_METADATA, parameterInjectionMetadata);
+        Reflect.set(beanCtor, BEAN_CONFIG, beanConfig);
+        Reflect.set(beanCtor, BEAN, Symbol(beanCtor.name));
+        Reflect.set(beanCtor, BEAN_NAME, beanCtor.name);
+        Reflect.set(beanCtor, BEAN_CONSTRUCTOR_PARAMETER_METADATA, parameterInjectionMetadata);
     }
 
     static registerDerived(
-        originalComponentCtor: ComponentImpl<any>,
-        derivedComponentCtor: ComponentImpl<any>,
+        originalBeanCtor: BeanImpl<any>,
+        derivedBeanCtor: BeanImpl<any>,
     ) {
 
-        Reflect.set(derivedComponentCtor, COMPONENT, ComponentReflector.getSymbol(originalComponentCtor));
-        Reflect.set(derivedComponentCtor, COMPONENT_NAME, ComponentReflector.getName(originalComponentCtor));
-        Reflect.set(derivedComponentCtor, COMPONENT_CONFIG, ComponentReflector.getConfig(originalComponentCtor));
-        Reflect.set(derivedComponentCtor, COMPONENT_CONSTRUCTOR_PARAMETER_METADATA,
-            ComponentReflector.getConstructorArgumentsInjectionMetadata(originalComponentCtor));
+        Reflect.set(derivedBeanCtor, BEAN, BeanReflector.getSymbol(originalBeanCtor));
+        Reflect.set(derivedBeanCtor, BEAN_NAME, BeanReflector.getName(originalBeanCtor));
+        Reflect.set(derivedBeanCtor, BEAN_CONFIG, BeanReflector.getConfig(originalBeanCtor));
+        Reflect.set(derivedBeanCtor, BEAN_CONSTRUCTOR_PARAMETER_METADATA,
+            BeanReflector.getConstructorArgumentsInjectionMetadata(originalBeanCtor));
     }
 
     static getConstructorArgumentsInjectionMetadata(
-        componentCtor: ComponentImpl<any>
+        beanCtor: BeanImpl<any>
     ): ArgumentsInjectionMetadata {
-        return Reflect.get(componentCtor, COMPONENT_CONSTRUCTOR_PARAMETER_METADATA);
+        return Reflect.get(beanCtor, BEAN_CONSTRUCTOR_PARAMETER_METADATA);
     }
 
     static setConstructorArgumentsInjectionMetadata(
@@ -109,7 +109,7 @@ export class ComponentReflector {
     ): void {
 
         // fetch (probably existing) meta data
-        const parameterInjectionMetaData: ArgumentsInjectionMetadata = ComponentReflector.getMethodArgumentsInjectionMetadata(
+        const parameterInjectionMetaData: ArgumentsInjectionMetadata = BeanReflector.getMethodArgumentsInjectionMetadata(
             targetClassInstanceOrCtor, propertyKey
         ) || createDefaultArgumentsInjectionMetadata();
 
@@ -133,55 +133,55 @@ export class ComponentReflector {
         );
     }
 
-    static getSymbol(targetCtor: ComponentImpl<any>): any {
-        return Reflect.get(targetCtor, COMPONENT);
+    static getSymbol(targetCtor: BeanImpl<any>): any {
+        return Reflect.get(targetCtor, BEAN);
     }
 
-    static getName(targetCtor: ComponentImpl<any>): string {
-        return Reflect.get(targetCtor, COMPONENT_NAME);
+    static getName(targetCtor: BeanImpl<any>): string {
+        return Reflect.get(targetCtor, BEAN_NAME);
     }
 
-    static getConfig(targetCtor: ComponentImpl<any>): BeanConfig<ComponentImpl<any>> {
-        return Reflect.get(targetCtor, COMPONENT_CONFIG);
+    static getConfig(targetCtor: BeanImpl<any>): BeanConfig<BeanImpl<any>> {
+        return Reflect.get(targetCtor, BEAN_CONFIG);
     }
 
     /* When constructor arguments (injections) are resolved, the result is cached for later use */
-    static setResolvedConstructorArguments(targetCtor: ComponentImpl<any>, constructorArguments: Array<ComponentImpl<any>>): void {
+    static setResolvedConstructorArguments(targetCtor: BeanImpl<any>, constructorArguments: Array<BeanImpl<any>>): void {
         Reflect.set(targetCtor, RESOLVED_CONSTRUCTOR_ARGUMENTS, constructorArguments);
     }
 
-    static getResolvedConstructorArguments(targetCtor: ComponentImpl<any>): Array<ComponentImpl<any>> {
+    static getResolvedConstructorArguments(targetCtor: BeanImpl<any>): Array<BeanImpl<any>> {
         return Reflect.get(targetCtor, RESOLVED_CONSTRUCTOR_ARGUMENTS);
     }
 
-    static isComponent(componentCtor: ComponentImpl<any>): boolean {
-        return !!ComponentReflector.getSymbol(componentCtor);
+    static isBean(beanCtor: BeanImpl<any>): boolean {
+        return !!BeanReflector.getSymbol(beanCtor);
     }
 
-    static getInitializers(targetCtor: ComponentImpl<any>): Array<BeanInitializer> {
-        return Reflect.get(targetCtor, COMPONENT_INITIALIZERS) || [];
+    static getInitializers(targetCtor: BeanImpl<any>): Array<BeanInitializer> {
+        return Reflect.get(targetCtor, BEAN_INITIALIZERS) || [];
     }
 
-    static addInitializer(targetCtor: ComponentImpl<any>, initializer: BeanInitializer): void {
-        const initializers = ComponentReflector.getInitializers(targetCtor);
+    static addInitializer(targetCtor: BeanImpl<any>, initializer: BeanInitializer): void {
+        const initializers = BeanReflector.getInitializers(targetCtor);
         initializers.push(initializer);
-        Reflect.set(targetCtor, COMPONENT_INITIALIZERS, initializers);
+        Reflect.set(targetCtor, BEAN_INITIALIZERS, initializers);
     }
 
     static callInitializers(initializers: Array<BeanInitializer>, instance: any): void {
         initializers.forEach(initializer => initializer(instance));
     }
 
-    static getConstructorArgumentInitializers(targetCtor: ComponentImpl<any>): Array<ConstructorArgumentInitializer> {
+    static getConstructorArgumentInitializers(targetCtor: BeanImpl<any>): Array<ConstructorArgumentInitializer> {
         return Reflect.get(targetCtor, CONSTRUCTOR_ARGUMENT_INITIALIZERS) || [];
     }
 
     static addConstructorArgumentInitializer(
-        targetCtor: ComponentImpl<any>,
+        targetCtor: BeanImpl<any>,
         initializer: ConstructorArgumentInitializerFunction,
         argumentIndex: number
     ): void {
-        const initializers = ComponentReflector.getConstructorArgumentInitializers(targetCtor);
+        const initializers = BeanReflector.getConstructorArgumentInitializers(targetCtor);
         initializers.push({
             initializer,
             argumentIndex

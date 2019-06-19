@@ -1,13 +1,13 @@
-import {ComponentImpl} from "../../../di/src/interface/ComponentImpl";
-import {Component, ComponentReflector} from "../../../di";
+import {BeanImpl} from "../../../di/src/interface/BeanImpl";
+import {Bean, BeanReflector} from "../../../di";
 import {createWebComponentClass} from "./createWebComponentClass";
 import {WebComponentReflector} from "../WebComponentReflector";
 import {installInitialMutationObserver} from "./installInitialMutationObserver";
 
-export const decorateWebComponent = (tagName: string, webComponent: ComponentImpl<any>) => {
+export const decorateWebComponent = (tagName: string, webComponent: BeanImpl<any>) => {
     
-    // @Component by default
-    const injectableWebComponent = Component(webComponent);
+    // @Bean by default
+    const injectableWebComponent = Bean(webComponent);
     const CustomWebComponent = createWebComponentClass(tagName, injectableWebComponent);
     const registeredCustomWebComponent = window.customElements.get(tagName);
 
@@ -21,7 +21,7 @@ export const decorateWebComponent = (tagName: string, webComponent: ComponentImp
         WebComponentReflector.registerByTagName(tagName);
     }
 
-    ComponentReflector.addInitializer(CustomWebComponent, (instance: any) => {
+    BeanReflector.addInitializer(CustomWebComponent, (instance: any) => {
 
         installInitialMutationObserver(instance, tagName);
     });

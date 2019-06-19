@@ -1,9 +1,9 @@
-import {Autowired, Component, Inject} from "@springtype/core";
+import {Autowired, Bean, Inject} from "@springtype/core";
 import {NiceSubtractor} from "../components/NiceSubtractor";
 import {Subtractor} from "../components/Subtractor";
 import {Multiplier} from "../components/Multiplier";
 
-@Component
+@Bean
 export class SimpleMock {
 
     constructor(

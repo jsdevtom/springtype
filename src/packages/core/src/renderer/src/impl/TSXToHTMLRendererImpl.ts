@@ -1,5 +1,5 @@
 import {RendererImpl} from "../interface/RendererImpl";
-import {ActiveLogger, Component, FRAGMENT_ELEMENT_TAG_NAME, VirtualElement} from "../../../../index";
+import {ActiveLogger, Bean, FRAGMENT_ELEMENT_TAG_NAME, VirtualElement} from "../../../../index";
 import {parseAttributeNS} from "./tsx-to-html-renderer-impl/function/parseAttributeNS";
 import {NamespaceAttributesMap} from "./tsx-to-html-renderer-impl/interface/NamespaceAttributesMap";
 import {collectNamespaceAttributes} from "./tsx-to-html-renderer-impl/function/collectNamespaceAttributes";
@@ -11,7 +11,7 @@ import {getInternalRenderApi} from "../function/getInternalRenderApi";
 import {FlowIdReflector} from "../../../webcomponent/src/reflector/cross-instance/FlowIdReflector";
 import {DEFAULT_NAMESPACE_NAME} from "./tsx-to-html-renderer-impl/constants";
 
-@Component
+@Bean
 export class TSXToHTMLRendererImpl implements RendererImpl {
 
     /**

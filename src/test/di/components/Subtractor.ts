@@ -1,7 +1,7 @@
-import {Component} from "@springtype/core";
+import {Bean} from "@springtype/core";
 import {AbstractSubtractor} from "../helper/AbstractSubtractor";
 
-@Component
+@Bean
 export class Subtractor extends AbstractSubtractor {
 
     signed: boolean = false;

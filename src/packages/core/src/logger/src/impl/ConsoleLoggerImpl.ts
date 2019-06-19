@@ -1,9 +1,9 @@
-import {Component} from "../../../di/index";
+import {Bean} from "../../../di/index";
 import {LoggerImpl} from "../interface/LoggerImpl";
 import {LogLevel} from "../enum/LogLevel";
 import {LogFilterFunction} from "../interface/LogFilterFunction";
 
-@Component
+@Bean
 export class ConsoleLoggerImpl implements LoggerImpl {
 
     private level!: LogLevel;

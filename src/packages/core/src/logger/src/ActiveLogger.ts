@@ -1,5 +1,5 @@
 import {LoggerImpl} from "./interface/LoggerImpl";
-import {Component} from "../../di";
+import {Bean} from "../../di";
 import {LogFilterFunction} from "./interface/LogFilterFunction";
 import {LogLevel} from "./enum/LogLevel";
 import {filterByLogLevel} from "./function/filterByLogLevel";
@@ -13,7 +13,7 @@ import {getLogger} from "./context/logger";
  *
  * constructor(protected logger: Logger) { ... }
  */
-@Component
+@Bean
 export class ActiveLogger implements LoggerImpl {
 
     protected _loggerImpl!: LoggerImpl;
