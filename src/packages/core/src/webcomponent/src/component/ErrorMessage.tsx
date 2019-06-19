@@ -1,13 +1,11 @@
-import {Element} from "../decorator/Element";
-import {Attribute} from "../decorator/Attribute";
+import {Attribute, Component, Style} from "../decorator";
 import {Lifecycle} from "../..";
-import {Style} from "../decorator/Style";
 import {VirtualElement} from "../../../virtualdom";
 import {Partial} from "../../../lang";
 import {ActiveRenderer} from "../../../renderer";
 
-@Element('st-error-message')
-@Style((view) => ({
+@Component('st-error-message')
+@Style(() => ({
     'p': {
         color: '#ff0000'
     }
@@ -18,7 +16,7 @@ export class ErrorMessage extends HTMLElement implements Lifecycle {
     message: string = "Unknown error.";
 
     render() {
-        return <p>{ this.message }</p> as VirtualElement;
+        return <p>{this.message}</p> as VirtualElement;
     }
 }
 
