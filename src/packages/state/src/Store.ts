@@ -1,9 +1,9 @@
-import {ApplicationContext, Component} from "@springtype/core";
+import {ApplicationContext, Bean} from "@springtype/core";
 import * as R from "@rematch/core";
 import * as Redux from 'redux'
 import {STORE} from "./constant/STORE";
 
-@Component
+@Bean
 export class Store<S> {
 
     private _nativeStore!: R.RematchStore;

@@ -1,5 +1,5 @@
 import {TranslationFormat, Translations, Translator} from "@springtype/i18n";
-import {buffer, Component} from "@springtype/core";
+import {buffer, Bean} from "@springtype/core";
 import {format} from "date-fns";
 
 import * as englishTranslations from "./translation/en.json";
@@ -22,7 +22,7 @@ export const dateFormat = (date: any, dateFormat: string) => {
 @Translations('de', germanTranslations)
 @TranslationFormat('uppercase', (value: string) => (value || '').toUpperCase())
 @TranslationFormat('DD-MM-YYYY_HH:mm:ss', (value: string) => dateFormat(value, 'dddd, DD-MM-YYYY HH:mm:ss'))
-@Component
+@Bean
 export class AppTranslationConfig {
 
     constructor(private translator: Translator) {

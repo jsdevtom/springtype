@@ -1,10 +1,10 @@
-import {Component} from "@springtype/core";
+import {Bean} from "@springtype/core";
 import {Stateful, StatefulLifecycle} from "@springtype/state";
 import {IRootState} from "../state/IRootState";
 import {ITodoItem} from "../state/ITodoState";
 
 @Stateful
-@Component
+@Bean
 export class TodoService implements StatefulLifecycle {
 
     constructor(

@@ -1,8 +1,8 @@
-import {Component} from "@springtype/core";
+import {Bean} from "@springtype/core";
 import * as i18next from "i18next";
 import {LanguageChangedHandler} from "./interface/LanguageChangedHandler";
 
-@Component
+@Bean
 export class Translator {
 
     async changeLanguage(language: string): Promise<void> {

@@ -1,5 +1,5 @@
 import {
-    Component,
+    Bean,
     ComponentImpl,
     ErrorMessage,
     UseElement,
@@ -15,7 +15,7 @@ import {RouteDefinition} from "../interface/RouteDefinition";
 import {LocationChangeDecision} from "../interface/LocationChangeDecision";
 import {ROUTE_NOT_FOUND} from "../constants";
 
-@Component
+@Bean
 @UseElement(ErrorMessage)
 export class HistoryRouterImpl implements RouterImpl {
 
