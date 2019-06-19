@@ -13,10 +13,10 @@ import {dependencies} from "../definition/dependencies";
 import {logErrors} from "./logErrors";
 import {devDependencies} from "../definition/devDependencies";
 import {isSafeToCreateAppIn} from "./isSafeToCreateAppIn";
-import {createElement} from "../../../st-create-component/src/function/createElement";
+import {createComponent} from "../../../st-create-component/src/function/createComponent";
 import {printHeader} from "../../../cli-common";
-import {appElementTemplate} from "../templates/appElementTemplate";
-import appElementStyleTemplate from "../templates/appElementStyleTemplate";
+import {appComponentTemplate} from "../templates/appComponentTemplate";
+import appComponentStyleTemplate from "../templates/appComponentStyleTemplate";
 
 export const createApp = async(projectPath: string) => {
 
@@ -50,7 +50,7 @@ export const createApp = async(projectPath: string) => {
         );
 
         fs.ensureDirSync(path.join(root, 'src'));
-        fs.ensureDirSync(path.join(root, 'src', 'element'));
+        fs.ensureDirSync(path.join(root, 'src', 'component'));
         fs.ensureDirSync(path.join(root, 'test'));
 
         // write index.html
@@ -89,10 +89,10 @@ export const createApp = async(projectPath: string) => {
 
                     } else {
 
-                        const elementName = appName + '-app';
+                        const componentName = appName + '-app';
 
                         // write $appName-app.tsx
-                        await createElement(elementName, appElementTemplate(`src/element/${elementName}/${elementName}.tsx`), appElementStyleTemplate(elementName));
+                        await createComponent(componentName, appComponentTemplate(`src/component/${componentName}/${componentName}.tsx`), appComponentStyleTemplate(componentName));
 
                         console.log(chalk.green('Thank you for choosing SpringType!'));
                         console.log('');

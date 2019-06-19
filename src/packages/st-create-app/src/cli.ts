@@ -1,7 +1,7 @@
 import {getAppName} from "./function/getAppName";
 import {createApp} from "./function/createApp";
 import {donationUrl} from "./definition/donationUrl";
-import {printBanner} from "../../cli-common/src/function/printBanner";
+import {printBanner} from "../../cli-common";
 
 const commander = require('commander');
 const envinfo = require('envinfo');
@@ -46,7 +46,7 @@ const program = new commander.Command(packageJson.name)
                 Binaries: ['Node', 'npm', 'Yarn'],
                 Browsers: ['Chrome', 'Edge', 'Internet Explorer', 'Firefox', 'Safari'],
                 npmPackages: ['react', 'react-dom', 'react-scripts'],
-                npmGlobalPackages: ['st-create-app', 'st-create-element'],
+                npmGlobalPackages: ['st-create-app', 'st-create-component'],
             },
             {
                 duplicates: true,

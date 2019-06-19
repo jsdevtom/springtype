@@ -1,4 +1,4 @@
-export default (elementName: string) => ({
+export default (component: string) => ({
 
     'body, html': {
         'padding': '0',
@@ -18,7 +18,7 @@ export default (elementName: string) => ({
         'border-radius': '4px',
         'padding': '2px 5px',
     },
-    [elementName]: {
+    [component]: {
         'display': 'flex',
         'flex-direction': 'column',
         'font-family': 'sans-serif',

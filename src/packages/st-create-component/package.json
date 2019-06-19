@@ -1,5 +1,5 @@
 {
-  "name": "st-create-element",
+  "name": "st-create-component",
   "version": "1.0.0-alpha.1.11",
   "publishConfig": {
     "access": "public"
@@ -11,7 +11,7 @@
   "files": [
     "dist/*"
   ],
-  "description": "Scaffold SpringType elements.",
+  "description": "Scaffold SpringType components.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/springtype-org/springtype.git"
@@ -33,10 +33,10 @@
     "commander"
   ],
   "bin": {
-    "st-create-element": "./dist/st-create-element/src/index.js"
+    "st-create-component": "./dist/st-create-component/src/index.js"
   },
-  "main": "dist/st-create-element/src/index.js",
-  "types": "dist/st-create-element/src/index.d.ts",
+  "main": "dist/st-create-component/src/index.js",
+  "types": "dist/st-create-component/src/index.d.ts",
   "author": "Aron Homberg",
   "license": "MIT",
   "bugs": {

@@ -2,11 +2,9 @@ const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
 
-export const isSafeToCreateElementIn = (rootPath: string, name: string) => {
+export const isSafeToCreateComponentIn = (rootPath: string, name: string) => {
 
-    console.log();
-
-    // TODO
+    // TODO: add logic here
 
     return true;
 };

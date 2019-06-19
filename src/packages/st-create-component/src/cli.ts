@@ -1,23 +1,23 @@
 import {donationUrl} from "./definition/donationUrl";
-import {createElement} from "./function/createElement";
-import {printBanner} from "../../cli-common/src/function/printBanner";
+import {createComponent} from "./function/createComponent";
+import {printBanner} from "../../cli-common";
 
 const commander = require('commander');
 const chalk = require('chalk');
 const packageJson = require('../../../package.json');
 
-let elementName: string|undefined = undefined;
+let componentName: string|undefined = undefined;
 
 const program = new commander.Command(packageJson.name)
     .version(packageJson.version)
-    .arguments('<element-name>')
-    .usage(`${chalk.green('<element-name>')} [options]`)
+    .arguments('<component-name>')
+    .usage(`${chalk.green('<component-name>')} [options]`)
     .action((name: string) => {
-        elementName = name;
+        componentName = name;
     })
     .allowUnknownOption()
     .on('--help', () => {
-        console.log(`    Only ${chalk.green('<element-name>')} is required.`);
+        console.log(`    Only ${chalk.green('<component-name>')} is required.`);
         console.log();
         console.log(
             `    If you have any problems, do not hesitate to file an issue:`
@@ -31,11 +31,11 @@ const program = new commander.Command(packageJson.name)
 
 (async() => {
 
-    if (typeof elementName === 'undefined') {
+    if (typeof componentName === 'undefined') {
 
-        console.error('Please specify the element name to create. It must contain a dash:');
+        console.error('Please specify the component name to create. It must contain a dash:');
         console.log(
-            `  ${chalk.cyan(program.name())} ${chalk.green('<element-name>')}`
+            `  ${chalk.cyan(program.name())} ${chalk.green('<component-name>')}`
         );
         console.log();
         console.log('For example:');
@@ -48,7 +48,7 @@ const program = new commander.Command(packageJson.name)
 
     } else {
 
-        await createElement(elementName);
+        await createComponent(componentName);
 
         printBanner(packageJson.homepage, packageJson.bugs.url, donationUrl);
     }

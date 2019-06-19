@@ -16,9 +16,9 @@ export const enablei18n = async(): Promise<void> => {
     console.log();
     console.log(`    ${chalk.gray('import * as englishTranslations from "./translation/en.json";')}`);
     console.log(`    ${chalk.gray('@Translations("en", englishTranslations)')}`);
-    console.log(`    ${chalk.gray('@UseElement(Translate)')}`);
+    console.log(`    ${chalk.gray('@UseComponent(Translate)')}`);
     console.log();
-    console.log(`to use the translations using translation elements:`);
+    console.log(`to use the translations using translation components:`);
     console.log();
     console.log(`    ${chalk.gray('<st-t key="page_not_found" values={{ siteUrl: document.location.hash }} />')}`);
     console.log();
