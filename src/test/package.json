@@ -6,8 +6,8 @@
   },
   "description": "It just works.",
   "dependencies": {
-    "@springtype/core": "^1.0.0-alpha.1.0",
-    "@springtype/validate": "^1.0.0-alpha.1.0",
+    "@springtype/core": "file:../src/packages/core",
+    "@springtype/validate": "file:../src/packages/validate",
     "@types/node": "^10.12.30",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.3"

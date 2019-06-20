@@ -1,6 +1,6 @@
 import {
     Bean,
-    ComponentImpl,
+    BeanImpl,
     ErrorMessage,
     UseElement,
     VirtualElement,
@@ -143,7 +143,7 @@ export class HistoryRouterImpl implements RouterImpl {
         return !!WebComponentReflector.getTagName(component);
     }
 
-    protected getComponent(cmpOrDef: RouteDefinition | VirtualElement | ComponentImpl<any>): {
+    protected getComponent(cmpOrDef: RouteDefinition | VirtualElement | BeanImpl<any>): {
         params: any,
         element: VirtualElement
     } {

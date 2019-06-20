@@ -6,7 +6,7 @@
   },
   "description": "Validation for SpringType.",
   "dependencies": {
-    "@springtype/core": "^1.0.0-alpha.1.11",
+    "@springtype/core": "file:../core",
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.10.5",
     "reflect-metadata": "^0.1.12",

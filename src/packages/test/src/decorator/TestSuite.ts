@@ -5,7 +5,7 @@ import {registerJSDOM} from "@springtype/ssr";
 registerJSDOM();
 
 import {ITestRegistration, TEST_CONFIGS} from "./TestCase";
-import {ComponentReflector, Component} from "@springtype/core";
+import {BeanReflector, Bean} from "@springtype/core";
 import {expect} from "chai";
 
 export interface ITestClass<TC> extends Function {
@@ -14,7 +14,7 @@ export interface ITestClass<TC> extends Function {
 
 export function TestSuite(target: ITestClass<any>): any {
 
-    target = Component(target);
+    target = Bean(target);
 
     const testsToRun: Array<ITestRegistration> = Reflect.get(target, TEST_CONFIGS) || [];
     const testInstance = new target();
@@ -142,7 +142,7 @@ export function TestSuite(target: ITestClass<any>): any {
         }
     };
 
-    describe(ComponentReflector.getName(target), () => {
+    describe(BeanReflector.getName(target), () => {
 
         if (typeof testInstance['before'] === 'function') {
             testInstance['before']();

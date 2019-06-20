@@ -1,4 +1,4 @@
-import {ApplicationContext, Component} from "@springtype/core";
+import {ApplicationContext, Bean} from "@springtype/core";
 import * as R from "@rematch/core";
 import {RematchDispatcher} from "@rematch/core";
 import {StateManager} from "../StateManager";
@@ -8,7 +8,7 @@ import {IS_REDUCER} from "../constant/IS_REDUCER";
 export function StateModel(modelName: string): any {
 
     return (model: any) => {
-        const injectableModel = <any> Component(model);
+        const injectableModel = <any> Bean(model);
         const appContext = ApplicationContext.getInstance();
         const modelInstance = appContext.getBean(injectableModel);
 

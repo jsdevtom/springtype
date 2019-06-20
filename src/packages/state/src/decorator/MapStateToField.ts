@@ -1,7 +1,7 @@
 import {
     ApplicationContext,
-    ComponentImpl,
-    ComponentReflector,
+    BeanImpl,
+    BeanReflector,
     createChangeDetector
 } from "@springtype/core";
 import {Store} from "../Store";
@@ -15,9 +15,9 @@ export function MapStateToField(
     return (targetClass: any, methodName: string, argumentIndex: number) => {
 
         const store: Store<any> = ApplicationContext.getInstance().getBean(Store);
-        const instances: Array<ComponentImpl<any>> = [];
+        const instances: Array<BeanImpl<any>> = [];
 
-        ComponentReflector.addInitializer(targetClass, (instance: any) => {
+        BeanReflector.addInitializer(targetClass, (instance: any) => {
             instances.push(instance);
         });
 
@@ -56,7 +56,7 @@ export function MapStateToField(
             return argumentValue;
         };
 
-        ComponentReflector.addConstructorArgumentInitializer(targetClass, (argumentValue) => {
+        BeanReflector.addConstructorArgumentInitializer(targetClass, (argumentValue) => {
 
             const field = createField(argumentValue);
 

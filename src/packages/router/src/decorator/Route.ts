@@ -1,7 +1,7 @@
-import {ComponentImpl, VirtualElement} from "@springtype/core";
+import {BeanImpl, VirtualElement} from "@springtype/core";
 import {registerRoute} from "../function/registerRoute";
 
-export function Route(route: string, routeTargetWebComponent: VirtualElement|ComponentImpl<any>): any {
+export function Route(route: string, routeTargetWebComponent: VirtualElement|BeanImpl<any>): any {
 
     return (targetWebComponent: any) => {
 

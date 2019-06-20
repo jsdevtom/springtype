@@ -6,7 +6,7 @@
   },
   "description": "Internationalization API for SpringType.",
   "dependencies": {
-    "@springtype/core": "^1.0.0-alpha.1.11",
+    "@springtype/core": "file:../core",
     "@types/i18next": "^12.1.0",
     "@types/node": "^11.13.4",
     "i18next": "12.0.0",
