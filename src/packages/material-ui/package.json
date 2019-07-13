@@ -17,6 +17,7 @@
     "@material/switch": "^2.3.0",
     "@material/textfield": "^2.3.0",
     "@springtype/core": "^1.0.0-alpha.1.11",
+    "@springtype/router": "^1.0.0-alpha.1.11",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.10.5",
     "classnames": "^2.2.6",
@@ -35,12 +36,14 @@
     "clean": "npx rimraf dist",
     "watch": "tsc -w",
     "prebuild": "npm run clean",
+    "start": "npx parcel doc/index.html",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "author": "Michael Mannseicher, Aron Homberg",
   "license": "MIT",
   "devDependencies": {
+    "parcel": "^1.12.3",
     "rimraf": "2.6.3",
     "sass": "^1.17.2",
     "typescript": "^3.3.4000"

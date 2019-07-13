@@ -5,13 +5,10 @@ import {
     Lifecycle,
     Style,
     Template,
-    Partial, VirtualElement, ActiveRenderer, OnAttributeChange, OnFieldChange, Field
+    Partial
 } from '@springtype/core';
 import template from './MWCTextfield.tpl';
 import style from './MWCTextfield.tss';
-import {MDCRipple} from "@material/ripple/component";
-import {AttributeChangeEvent} from "@springtype/core/src/webcomponent/src/interface/AttributeChangeEvent";
-import {FieldComponent} from "../../../../examples/minesweeper/src/components/field/FieldComponent";
 
 @Element('mwc-textfield')
 @Template(template)

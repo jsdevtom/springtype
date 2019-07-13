@@ -3,6 +3,7 @@ import {VirtualElement, ActiveRenderer} from "@springtype/core";
 import classNames from "classnames";
 import "@material/checkbox/dist/mdc.checkbox.min.css"
 import "@material/form-field/dist/mdc.form-field.min.css"
+import {uniqueId} from "../../uniqueId";
 
 export default (view: MWCCheckbox) => {
 
@@ -11,7 +12,9 @@ export default (view: MWCCheckbox) => {
         'mdc-checkbox--disabled': view.disabled,
     });
 
-    const inputElement: VirtualElement = <input  inject={{checkbox: view}} id="checkbox" type="checkbox" class="mdc-checkbox__native-control"/>;
+    const uniqueCheckboxId = uniqueId() + '_' + Date.now() + '_checkbox';
+    const inputElement: VirtualElement = <input inject={{checkbox: view}} id={uniqueCheckboxId} type="checkbox"
+                                                class="mdc-checkbox__native-control"/>;
     if (view.checked) {
         inputElement.attributes.checked = true;
     }
@@ -37,6 +40,6 @@ export default (view: MWCCheckbox) => {
                 <div class="mdc-checkbox__mixedmark"></div>
             </div>
         </div>
-        <label for="checkbox">{view.label}</label>
+        <label for={uniqueCheckboxId}>{view.label}</label>
     </div>
 }
