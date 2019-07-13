@@ -1,6 +1,6 @@
 {
   "name": "@springtype/core",
-  "version": "1.0.0-alpha.1.10",
+  "version": "1.0.0-alpha.1.11",
   "publishConfig": {
     "access": "public"
   },
@@ -10,6 +10,7 @@
     "url": "git+https://github.com/springtype-org/springtype.git"
   },
   "scripts": {
+    "prune": "npx rimraf dist node_modules package-lock.json",
     "clean": "npx rimraf dist",
     "watch": "tsc -w",
     "prebuild": "npm run clean",
