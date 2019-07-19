@@ -17,7 +17,7 @@
     "watch": "tsc -w",
     "prebuild": "npm run clean",
     "build": "tsc",
-    "test": "mocha /media/mansi/data-hd/mansi/projects/own/npm/springtype/src/test/dist/validate/decorator.spec.js"
+    "test": "mocha -r ts-node/register ./**/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "nyc": "^14.0.0",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.11",
+    "ts-node": "^8.3.0",
     "typescript": "^3.3.4000"
   }
 }
