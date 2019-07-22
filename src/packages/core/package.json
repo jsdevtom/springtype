@@ -10,11 +10,11 @@
     "url": "git+https://github.com/springtype-org/springtype.git"
   },
   "scripts": {
-    "prune": "npx st-rm-rf dist node_modules package-lock.json",
     "clean": "npx st-rm-rf dist",
-    "watch": "tsc -w",
+    "clean:all": "npx st-rm-rf dist node_modules package-lock.json",
     "prebuild": "npm run clean",
-    "build": "tsc",
+    "build": "tsc -w",
+    "build:watch": "tsc",
     "prepublishOnly": "npm run build"
   },
   "main": "dist/index.js",

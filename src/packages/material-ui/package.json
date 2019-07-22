@@ -6,14 +6,21 @@
   },
   "description": "Material UI for SpringType.",
   "dependencies": {
-    "@material/ripple": "^1.1.0",
     "@springtype/core": "../core",
+    "@springtype/router": "../router",
+    "@material/button": "^2.3.0",
+    "@material/card": "^2.3.0",
+    "@material/checkbox": "^2.3.0",
+    "@material/form-field": "^2.3.0",
+    "@material/icon-button": "^2.3.0",
+    "@material/radio": "^2.3.0",
+    "@material/ripple": "^2.3.0",
+    "@material/select": "^2.3.0",
+    "@material/switch": "^2.3.0",
+    "@material/textfield": "^2.3.0",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.10.5",
-    "classnames": "^2.2.6",
-    "reflect-metadata": "^0.1.12",
-    "ts-polyfill": "^3.3.3",
-    "tslib": "^1.9.3"
+    "classnames": "^2.2.6"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,16 +29,18 @@
     "url": "git+https://github.com/springtype-org/springtype.git"
   },
   "scripts": {
-    "prune": "npx st-rm-rf dist node_modules package-lock.json",
-    "clean": "npx st-rm-rf dist",
-    "watch": "tsc -w",
-    "prebuild": "npm run clean",
+    "clean": "npx st-rm-rf dist .cache",
+    "clean:all": "npx st-rm-rf dist .cache node_modules package-lock.json",
     "build": "tsc",
+    "build:watch": "tsc -w",
+    "prebuild": "npm run clean",
+    "start": "npx parcel doc/index.html",
     "prepublishOnly": "npm run build"
   },
   "author": "Michael Mannseicher, Aron Homberg",
   "license": "MIT",
   "devDependencies": {
+    "parcel": "^1.12.3",
     "typescript": "^3.3.4000"
   },
   "browserslist": [
